@@ -7,7 +7,6 @@ import items.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -16,59 +15,183 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Item',
+            name="Item",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=75, unique=True, verbose_name='название товара')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='описание товара')),
-                ('price', models.DecimalField(decimal_places=0, help_text='Укажите цену товара', max_digits=20, verbose_name='Цена товара')),
-                ('amount', models.PositiveSmallIntegerField(default=0, verbose_name='колличество на складе')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=75,
+                        unique=True,
+                        verbose_name="название товара",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True, null=True, verbose_name="описание товара"
+                    ),
+                ),
+                (
+                    "price",
+                    models.DecimalField(
+                        decimal_places=0,
+                        help_text="Укажите цену товара",
+                        max_digits=20,
+                        verbose_name="Цена товара",
+                    ),
+                ),
+                (
+                    "amount",
+                    models.PositiveSmallIntegerField(
+                        default=0, verbose_name="колличество на складе"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ItemOrder',
+            name="ItemOrder",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=0, help_text='Укажите цену товара', max_digits=3, verbose_name='Колличество единиц товара')),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='item_order', to='items.item')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "amount",
+                    models.DecimalField(
+                        decimal_places=0,
+                        help_text="Укажите цену товара",
+                        max_digits=3,
+                        verbose_name="Колличество единиц товара",
+                    ),
+                ),
+                (
+                    "item",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="item_order",
+                        to="items.item",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('items', models.ManyToManyField(related_name='order', through='items.ItemOrder', to='items.item')),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "items",
+                    models.ManyToManyField(
+                        related_name="order",
+                        through="items.ItemOrder",
+                        to="items.item",
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="orders",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Заказ',
-                'verbose_name_plural': 'Заказы',
-                'ordering': ['created_at'],
+                "verbose_name": "Заказ",
+                "verbose_name_plural": "Заказы",
+                "ordering": ["created_at"],
             },
         ),
         migrations.CreateModel(
-            name='MoneyTransfer',
+            name="MoneyTransfer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.PositiveIntegerField(verbose_name='сумма')),
-                ('description', models.CharField(max_length=150)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='transfers', to=settings.AUTH_USER_MODEL)),
-                ('wallet_owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='charges', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("amount", models.PositiveIntegerField(verbose_name="сумма")),
+                ("description", models.CharField(max_length=150)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="transfers",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "wallet_owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="charges",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='itemorder',
-            name='order',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order_item', to='items.order'),
+            model_name="itemorder",
+            name="order",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="order_item",
+                to="items.order",
+            ),
         ),
         migrations.CreateModel(
-            name='ItemImages',
+            name="ItemImages",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to=items.models.custom_image_path)),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='items.item')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        upload_to=items.models.custom_image_path
+                    ),
+                ),
+                (
+                    "item",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="images",
+                        to="items.item",
+                    ),
+                ),
             ],
         ),
     ]

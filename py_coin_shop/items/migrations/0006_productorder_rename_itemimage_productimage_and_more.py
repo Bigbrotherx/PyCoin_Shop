@@ -5,52 +5,75 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('items', '0005_order_items'),
+        ("items", "0005_order_items"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ProductOrder',
+            name="ProductOrder",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.PositiveSmallIntegerField(help_text='Укажите цену товара', verbose_name='Колличество единиц товара')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "amount",
+                    models.PositiveSmallIntegerField(
+                        help_text="Укажите цену товара",
+                        verbose_name="Колличество единиц товара",
+                    ),
+                ),
             ],
         ),
         migrations.RenameModel(
-            old_name='ItemImage',
-            new_name='ProductImage',
+            old_name="ItemImage",
+            new_name="ProductImage",
         ),
         migrations.RenameField(
-            model_name='productimage',
-            old_name='item',
-            new_name='product',
+            model_name="productimage",
+            old_name="item",
+            new_name="product",
         ),
         migrations.RemoveField(
-            model_name='order',
-            name='items',
+            model_name="order",
+            name="items",
         ),
         migrations.RenameModel(
-            old_name='Item',
-            new_name='Product',
+            old_name="Item",
+            new_name="Product",
         ),
         migrations.DeleteModel(
-            name='ItemOrder',
+            name="ItemOrder",
         ),
         migrations.AddField(
-            model_name='productorder',
-            name='order',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order_item', to='items.order'),
+            model_name="productorder",
+            name="order",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="order_item",
+                to="items.order",
+            ),
         ),
         migrations.AddField(
-            model_name='productorder',
-            name='product',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='item_order', to='items.product'),
+            model_name="productorder",
+            name="product",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="item_order",
+                to="items.product",
+            ),
         ),
         migrations.AddField(
-            model_name='order',
-            name='products',
-            field=models.ManyToManyField(through='items.ProductOrder', to='items.product'),
+            model_name="order",
+            name="products",
+            field=models.ManyToManyField(
+                through="items.ProductOrder", to="items.product"
+            ),
         ),
     ]

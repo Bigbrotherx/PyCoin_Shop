@@ -12,7 +12,7 @@ from .serializers import (
     ProductSerializer,
     Product,
     WalletSerializer,
-    Wallet
+    Wallet,
 )
 
 
@@ -21,7 +21,7 @@ class WalletRetrieveAPIView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         """Получение коментов для конкретного пользователя"""
-        queryset = get_object_or_404(Wallet, user=self.kwargs.get('user_id'))
+        queryset = get_object_or_404(Wallet, user=self.kwargs.get("user_id"))
         return queryset
 
 
@@ -45,7 +45,8 @@ class ProductImageViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Получение картинок для конкретного товара"""
         queryset = get_object_or_404(
-            ProductImage, item=self.kwargs.get('item_id'))
+            ProductImage, item=self.kwargs.get("item_id")
+        )
         return queryset
 
 

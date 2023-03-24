@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('items', '0004_remove_order_items'),
+        ("items", "0004_remove_order_items"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='items',
-            field=models.ManyToManyField(through='items.ItemOrder', to='items.item'),
+            model_name="order",
+            name="items",
+            field=models.ManyToManyField(
+                through="items.ItemOrder", to="items.item"
+            ),
         ),
     ]
