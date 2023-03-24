@@ -1,0 +1,224 @@
+openapi: '3.0.2'
+info:
+  title: api pyCoinShop
+  version: '1.0'
+servers:
+  - url: https://localhost:8000/api/v1
+tags:
+  - name: items
+  - name: orders
+  - name: balance
+  - name: jwt
+paths:
+  /items/:
+    get:
+      tags: 
+        - items
+      operationId: ListItems
+      description: Список всех товаров
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+  /items/{id}/:
+    get:
+      tags:
+        - items
+      operationId: ItemInfo
+      description: 'Детальная информация о товаре'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    post:
+      tags:
+        - items
+      operationId: AddItem
+      description: 'Добавить товар'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    put:
+      tags:
+        - items
+      operationId: UpdateItem
+      description: 'Обновить товар'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    patch:
+      tags:
+        - items
+      operationId: PartialUpdateItem
+      description: 'Частично обновить товар'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    delete:
+      tags:
+        - items
+      operationId: DeletItem
+      description: 'Удалить товар'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+  /jwt/create/:
+    post:
+      tags:
+        - jwt
+      operationId: JWTCreate
+      description: 'Создать токен авторизации'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+  /jwt/update/:
+    post:
+      tags:
+        - jwt
+      operationId: JWTUpdate
+      description: 'Обновить токен авторизации'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+  /jwt/verify/:
+    post:
+      tags:
+        - jwt
+      operationId: JWTVerify
+      description: 'Проверить токен авторизации'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+  /orders/:
+    get:
+      tags:
+        - orders
+      operationId: ListOrders
+      description: 'Список всех заказов должен работать фильтр по пользователю'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+  /orders/{id}/:
+    get:
+      tags:
+        - orders
+      operationId: OrderInfo
+      description: 'Детальная информация о заказе'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    post:
+      tags: 
+        - orders
+      operationId: AddOrder
+      description: 'Создать заказ'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    put:
+      tags:
+        - orders
+      operationId: UpdateOrder
+      description: 'Обновить заказ'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    patch:
+      tags:
+        - orders
+      operationId: PartialUpdateOrder
+      description: 'Частично обновить заказ'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    delete:
+      tags:
+        - orders
+      operationId: DeleteOrder
+      description: 'Удалить заказ'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+  /balances/:
+    get:
+      tags:
+        - balance
+      operationId: BalanceDetails
+      description: 'Детальная информация об изменении баланса '  
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
+    post:
+      tags:
+        - balance
+      operationId: AddBalance
+      description: 'Создать транзакцию с изменением баланса'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+          description: Удачное выполнение запроса
